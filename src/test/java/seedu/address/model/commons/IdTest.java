@@ -1,36 +1,30 @@
 package seedu.address.model.commons;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.Test;
 
 public class IdTest {
-
     @Test
-    public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new ID(null));
-    }
-
-    @Test
-    public void constructor_invalidID_throwsIllegalArgumentException() {
-        String invalidID = "abc";
-        assertThrows(IllegalArgumentException.class, () -> new ID(invalidID));
+    public void constructor_success() {
+        assertEquals(0, ID.newClientID().getId());
+        assertEquals("0", ID.newProductID().toString());
     }
 
     @Test
     public void equals() {
-        ID id = new ID("2");
+        ID idClient = ID.newClientID();
+        ID idProduct = ID.newProductID();
 
         // same object -> returns true
-        assertTrue(id.equals(id));
+        assertEquals(idClient, idClient);
+        assertEquals(idProduct, idProduct);
 
         // same id -> returns true
-        assertTrue(id.equals(new ID("2")));
+        assertEquals(idClient.getId(), idProduct.getId());
 
         // different id -> returns false
-        assertFalse(id.equals(new ID("5")));
-
+        assertNotEquals(idClient, ID.newProductID());
     }
 }
