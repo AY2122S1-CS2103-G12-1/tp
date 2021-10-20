@@ -22,7 +22,7 @@ public class Product implements Category {
     private final Quantity quantity;
 
     public Product(Name name, UnitPrice unitPrice, Quantity quantity) {
-        this(new ID(), name, unitPrice, quantity);
+        this(ID.newProductID(), name, unitPrice, quantity);
     }
 
     private Product(ID id, Name name, UnitPrice unitPrice, Quantity quantity) {
@@ -116,12 +116,9 @@ public class Product implements Category {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("ID: ")
-                .append(id)
-                .append("; Name: ")
-                .append(name)
-                .append("; Unit Price: ")
-                .append(unitPrice);
+        builder.append("ID: ").append(id)
+                .append("; Name: ").append(name)
+                .append("; Unit Price: ").append(unitPrice);
 
         if (quantity != null) {
             builder.append("; Quantity: ").append(quantity);

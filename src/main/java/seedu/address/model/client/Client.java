@@ -23,7 +23,7 @@ public class Client implements Category {
     private final Address address;
 
     public Client(Name name, PhoneNumber phoneNumber, Email email, Address address) {
-        this(new ID(), name, phoneNumber, email, address);
+        this(ID.newClientID(), name, phoneNumber, email, address);
     }
 
     private Client(ID id, Name name, PhoneNumber phoneNumber, Email email, Address address) {
@@ -109,10 +109,10 @@ public class Client implements Category {
 
         Client otherClient = (Client) other;
         return (id.equals(otherClient.id)
-                       && name.equals(otherClient.name)
-                       && phoneNumber.equals(otherClient.phoneNumber)
-                       && email.equals(otherClient.email)
-                       && address.equals(otherClient.address));
+                        && name.equals(otherClient.name)
+                        && phoneNumber.equals(otherClient.phoneNumber)
+                        && email.equals(otherClient.email)
+                        && address.equals(otherClient.address));
     }
 
     @Override
@@ -124,12 +124,9 @@ public class Client implements Category {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("ID: ")
-                .append(id)
-                .append("; Name: ")
-                .append(name)
-                .append("; Phone Number: ")
-                .append(phoneNumber);
+        builder.append("ID: ").append(id)
+                .append("; Name: ").append(name)
+                .append("; Phone Number: ").append(phoneNumber);
 
         if (email != null) {
             builder.append("; Email: ").append(email);
