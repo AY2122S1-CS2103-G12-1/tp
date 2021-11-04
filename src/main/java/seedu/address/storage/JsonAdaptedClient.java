@@ -74,8 +74,6 @@ class JsonAdaptedClient {
         final Name modelName;
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
-        } else if (!Name.isValidName(name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         } else {
             modelName = new Name(name);
         }
@@ -84,29 +82,12 @@ class JsonAdaptedClient {
         if (phoneNumber == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     PhoneNumber.class.getSimpleName()));
-        } else if (!PhoneNumber.isValidPhoneNumber(phoneNumber)) {
-            throw new IllegalValueException(PhoneNumber.MESSAGE_CONSTRAINTS);
         } else {
             modelPhoneNumber = new PhoneNumber(phoneNumber);
         }
 
-        final Email modelEmail;
-        if (email == null) {
-            modelEmail = null;
-        } else if (!Email.isValidEmail(email)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
-        } else {
-            modelEmail = new Email(email);
-        }
-
-        final Address modelAddress;
-        if (address == null) {
-            modelAddress = null;
-        } else if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
-        } else {
-            modelAddress = new Address(address);
-        }
+        final Email modelEmail = email == null ? null : new Email(email);
+        final Address modelAddress = address == null ? null : new Address(address);
 
         final Set<Order> modelOrders = new HashSet<>();
         for (JsonAdaptedOrder order : ordered) {

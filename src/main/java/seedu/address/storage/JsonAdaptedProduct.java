@@ -53,8 +53,6 @@ public class JsonAdaptedProduct {
         final Name modelName;
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
-        } else if (!Name.isValidName(name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         } else {
             modelName = new Name(name);
         }
@@ -63,20 +61,11 @@ public class JsonAdaptedProduct {
         if (unitPrice == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     UnitPrice.class.getSimpleName()));
-        } else if (!UnitPrice.isValidUnitPrice(unitPrice)) {
-            throw new IllegalValueException(UnitPrice.MESSAGE_CONSTRAINTS);
         } else {
             modelUnitPrice = new UnitPrice(unitPrice);
         }
 
-        final Quantity modelQuantity;
-        if (quantity == null) {
-            modelQuantity = null;
-        } else if (!Quantity.isValidQuantity(quantity)) {
-            throw new IllegalValueException(Quantity.MESSAGE_CONSTRAINTS);
-        } else {
-            modelQuantity = new Quantity(quantity);
-        }
+        final Quantity modelQuantity = quantity == null ? null : new Quantity(quantity);
 
         return new Product(modelName, modelUnitPrice, modelQuantity);
     }
